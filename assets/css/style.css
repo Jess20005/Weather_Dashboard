@@ -1,0 +1,41 @@
+*{
+    margin:0;
+    padding: 0;
+}
+
+
+h1{
+    text-align: center;
+    background-color:#2f302e;
+    color: white;
+    font-size: 50px;
+}
+
+.searchArea {
+    flex-direction: column;
+    color:tomato;
+    justify-content: space-between;
+}
+
+h2{
+    text-align: center;
+}
+
+.currentWeather span {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    height: 5vh;
+}
+
+h3{
+    font-size: 25px;
+}
+
+.fiveDayForecast{
+    margin-top: 100px;
+    display: flex;
+    padding-left: 500px;
+    
+}
