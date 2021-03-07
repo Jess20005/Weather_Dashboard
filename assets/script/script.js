@@ -14,12 +14,16 @@ function searchApi(name) {
     fetch(locQueryUrl)
       .then(function (response) {
         return response.json();
+        
       })
       .then(function (locRes) {
+        console.log (locRes);
         // write query to page so user knows what they are viewing
-        var wind = locRes.wind.speed;
         var temp = locRes.main.temp;
-
+        var humidity = locRes.main.humidity;
+        var windSpeed =locRes.wind.speed;
+        // var uvIndex = 
+        // 
       })
       .catch(function (error) {
         console.error(error);
