@@ -20,17 +20,22 @@ function searchApi(name) {
   .then(function (locRes) {
     console.log (locRes);
     // write query to page so user knows what they are viewing
-    var temp = locRes.main.temp;
-    var humidity = locRes.main.humidity;
-    var windSpeed =locRes.wind.speed;
-    // var uvIndex = 
-    // 
+    var display = displayData(name);
+
+    $(".currentWeather").html(display);
+
   })
+
   .catch(function (error) {
     console.error(error);
   });
   
 }
+function displayData(name){
+	return "<h3><strong>Temperature</strong>:" + locRes.main.temp +"</h3>" +
+	       "<h3><strong>Humidity</strong>:" + locRes.main.humidity +"</h3>";
+}
+
 searchButton.onclick = getCityName
 
 var searchInput=document.getElementById("search-input");
@@ -58,7 +63,7 @@ function renderSearches() {
 function init() {
   // Get stored search from localStorage
   var storedSearches = JSON.parse(localStorage.getItem("searches"));
-
+  
   if (storedSearches !== null) {
     searches = storedSearches;
   }
@@ -72,17 +77,17 @@ function storeSearches() {
 }
 
 // Add submit event to form
-searchForm.addEventListener("searchButton", function(event) {
+searchForm.addEventListener("click", function(event) {
   event.preventDefault();
-
+  // console.log(searchForm);
   var searchText = searchInput.value.trim();
-
+  
   // Return from function early if submitted searchText is blank
   if (searchText === "") {
     return;
   }
 
-  // Add new searchText to todos array, clear the input
+  // Add new searchText to search array, clear the input
   searches.push(searchText);
   searchInput.value = "";
 
