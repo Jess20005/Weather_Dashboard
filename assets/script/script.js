@@ -14,13 +14,14 @@ function searchApi(name) {
   
   fetch(locQueryUrl)
   .then(function (response) {
+    
     return response.json();
     
   })
   .then(function (locRes) {
     console.log (locRes);
     // write query to page so user knows what they are viewing
-    var display = displayData(name);
+    var display = displayData(locRes);
 
     $(".currentWeather").html(display);
 
@@ -31,9 +32,13 @@ function searchApi(name) {
   });
   
 }
-function displayData(name){
-	return "<h3><strong>Temperature</strong>:" + locRes.main.temp +"</h3>" +
-	       "<h3><strong>Humidity</strong>:" + locRes.main.humidity +"</h3>";
+function displayData(locRes){
+ 
+	return "<p><strong>Name</strong>:" + locRes.name +"</p>" +
+         "<p><strong>Temperature</strong>:" + locRes.main.temp +"</p>" +
+	       "<p><strong>Humidity</strong>:" + locRes.main.humidity +"</p>"+
+         "<p><strong>Wind Speed</strong>:" + locRes.wind.speed +"</p>" +
+         "<p><strong>UV Index</strong>:" + locRes.sys.type +"</p>" ;
 }
 
 searchButton.onclick = getCityName
