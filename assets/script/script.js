@@ -1,59 +1,72 @@
 //Once click on search button, then  grab value from input element
 var searchButton = document.getElementById("searchButton");
 
-
 function getCityName(event) {
-  event.preventDefault()
-  var cityNameInput = document.getElementById("search-input").value
-  searchApi(cityNameInput)
+  event.preventDefault();
+  var cityNameInput = document.getElementById("search-input").value;
+  searchApi(cityNameInput);
 }
 
 //
 function searchApi(name) {
-  var locQueryUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + name + '&appid=87bf69b5ba24306a1d2648c4053a20d1';
-  
+  var locQueryUrl =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    name +
+    "&appid=87bf69b5ba24306a1d2648c4053a20d1";
+
   fetch(locQueryUrl)
-  .then(function (response) {
-    
-    return response.json();
-    
-  })
-  .then(function (locRes) {
-    console.log (locRes);
-    // write query to page so user knows what they are viewing
-    var display = displayData(locRes);
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (locRes) {
+      console.log (locRes);
+      // write query to page so user knows what they are viewing
 
-    $(".currentWeather").html(display);
+      var temp = locRes.main.temp;
+      document.getElementById("temp").value += temp;
+   
+      // var display = displayData(locRes);
 
-  })
+      // $(".currentWeather").html(display);
+    })
 
-  .catch(function (error) {
-    console.error(error);
-  });
-  
-}
-function displayData(locRes){
- 
-	return "<p><strong>Name</strong>:" + locRes.name +"</p>" +
-         "<p><strong>Temperature</strong>:" + locRes.main.temp +"</p>" +
-	       "<p><strong>Humidity</strong>:" + locRes.main.humidity +"</p>"+
-         "<p><strong>Wind Speed</strong>:" + locRes.wind.speed +"</p>" +
-         "<p><strong>UV Index</strong>:" + locRes.sys.type +"</p>" ;
+    .catch(function (error) {
+      console.error(error);
+    });
 }
 
-searchButton.onclick = getCityName
+function displayData(locRes) {
+  return (
+    "<p><strong>Name</strong>:" +
+    locRes.name +
+    "</p>" +
+    "<p><strong>Temperature</strong>:" +
+    locRes.main.temp +
+    "</p>" +
+    "<p><strong>Humidity</strong>:" +
+    locRes.main.humidity +
+    "</p>" +
+    "<p><strong>Wind Speed</strong>:" +
+    locRes.wind.speed +
+    "</p>" +
+    "<p><strong>UV Index</strong>:" +
+    locRes.sys.type +
+    "</p>"
+  );
+}
 
-var searchInput=document.getElementById("search-input");
-var searchList=document.getElementById("search-list");
-var searchForm=document.getElementById("search-form");
+searchButton.onclick = getCityName;
 
-var searches=[];
 
+var searchInput = document.getElementById("search-input");
+var searchList = document.getElementById("search-list");
+var searchForm = document.getElementById("search-form");
+
+var searches = [];
 
 function renderSearches() {
- 
   searchList.innerHTML = "";
- 
+
   for (var i = 0; i < searches.length; i++) {
     var search = searches[i];
 
@@ -68,7 +81,7 @@ function renderSearches() {
 function init() {
   // Get stored search from localStorage
   var storedSearches = JSON.parse(localStorage.getItem("searches"));
-  
+
   if (storedSearches !== null) {
     searches = storedSearches;
   }
@@ -82,11 +95,11 @@ function storeSearches() {
 }
 
 // Add submit event to form
-searchForm.addEventListener("click", function(event) {
+searchForm.addEventListener("click", function (event) {
   event.preventDefault();
   // console.log(searchForm);
   var searchText = searchInput.value.trim();
-  
+
   // Return from function early if submitted searchText is blank
   if (searchText === "") {
     return;
@@ -101,4 +114,4 @@ searchForm.addEventListener("click", function(event) {
   renderSearches();
 });
 
-init()
+init();
