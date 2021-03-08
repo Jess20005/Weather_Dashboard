@@ -22,12 +22,12 @@ function searchApi(name) {
       console.log (locRes);
       // write query to page so user knows what they are viewing
 
-      var temp = locRes.main.temp;
-      document.getElementById("temp").value += temp;
+      // var temp = locRes.main.temp;
+      // document.getElementById("temp").value += temp;
    
-      // var display = displayData(locRes);
+      var display = displayData(locRes);
 
-      // $(".currentWeather").html(display);
+      $("#currentWeather").html(display);
     })
 
     .catch(function (error) {
